@@ -1,0 +1,27 @@
+{
+  "handoff_beat": 4,
+  "front": {
+    "program_id": "river-bridge-morning",
+    "background_id": "morning-room",
+    "recording_id": "morning-insert",
+    "frames": [31, 32, 33],
+    "request_id": "same",
+    "window": [3, 6]
+  },
+  "back": {
+    "program_id": "river-bridge-midday",
+    "background_id": "midday-room",
+    "recording_id": "midday-insert",
+    "frames": [41, 42],
+    "request_id": "same",
+    "window": [6, 8]
+  },
+  "contested": {
+    "request_id": "crowded",
+    "window": [4, 6]
+  },
+  "movable_front": {
+    "frames": [31, 32],
+    "window": [2, 6]
+  }
+}

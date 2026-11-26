@@ -1,0 +1,12 @@
+{
+  "program_id": "river-bridge-morning",
+  "background_id": "river-room",
+  "clips": {
+    "A": [10, 11],
+    "B": [70, 71],
+    "short": [50],
+    "long": [51, 52],
+    "pin": [8]
+  },
+  "idents": ["short", "long"]
+}
