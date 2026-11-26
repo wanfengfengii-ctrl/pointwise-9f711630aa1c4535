@@ -5,6 +5,7 @@ from functools import partial
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from inspect import signature
 
+from air.channel import channel_tick, pair_channel
 from air.local_ident import ident
 from air.playout import tick
 from catalog.recordings import record
@@ -37,6 +38,8 @@ def make_handler(database, link=None):
         '/timeline': partial(timeline, database),
         '/close': partial(close, database),
         '/report': partial(report, database),
+        '/channel/pair': partial(pair_channel, database),
+        '/channel/tick': partial(channel_tick, database),
     }
     routes = {path: (operation, signature(operation)) for path, operation in operations.items()}
 

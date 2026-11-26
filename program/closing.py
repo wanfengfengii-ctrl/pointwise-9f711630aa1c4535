@@ -1,3 +1,4 @@
+from air.channel import read_pairing
 from air.obligations import read_pending_obligations
 from air.state import read_cursor
 from program.database import conflict, write_transaction
@@ -13,6 +14,9 @@ def close(database, session_id):
             cursor = read_cursor(connection, session_id)
             if cursor.active is not None or read_pending_obligations(connection, session_id):
                 raise conflict('session_busy', 'playout must finish before closing the session')
+            pairing = read_pairing(connection, session_id)
+            if pairing is not None and pairing['beat'] < pairing['handoff_beat']:
+                raise conflict('session_busy', 'the channel has not reached the handoff beat')
             connection.execute(
                 'UPDATE sessions SET status = ? WHERE session_id = ?', ('closed', session_id)
             )

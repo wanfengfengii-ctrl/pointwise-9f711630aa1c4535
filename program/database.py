@@ -133,8 +133,17 @@ SCHEMA = (
            report_id INTEGER PRIMARY KEY REFERENCES sessions(session_id),
            payload TEXT NOT NULL
        )''',
+    '''CREATE TABLE IF NOT EXISTS channels (
+           channel_id INTEGER PRIMARY KEY,
+           front_session_id INTEGER NOT NULL REFERENCES sessions(session_id),
+           back_session_id INTEGER NOT NULL REFERENCES sessions(session_id),
+           handoff_beat INTEGER NOT NULL CHECK (handoff_beat > 0),
+           beat INTEGER NOT NULL CHECK (beat >= 0)
+       )''',
     '''CREATE INDEX IF NOT EXISTS obligations_pending
        ON obligations(session_id, progress, request_id)''',
+    '''CREATE INDEX IF NOT EXISTS channels_front ON channels(front_session_id)''',
+    '''CREATE INDEX IF NOT EXISTS channels_back ON channels(back_session_id)''',
 )
 
 
